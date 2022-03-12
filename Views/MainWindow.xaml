@@ -1,0 +1,38 @@
+﻿<Window x:Class="EMS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EMS"
+        mc:Ignorable="d"
+        Title="Employee Management System" Height="600" Width="900"
+      WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+
+
+            </Grid.RowDefinitions>
+
+
+            <Border BorderBrush="Black" BorderThickness="1">
+                <Menu Grid.Row="0" DockPanel.Dock="Top" >
+                    <MenuItem Header="Dashboard"
+                      Command="{Binding UpdateViewCommand}" CommandParameter="Dashboard" Height="25"/>
+                    <MenuItem Header="Project" Command="{Binding UpdateViewCommand}" CommandParameter="Project"/>
+                    <MenuItem Header="Employee"/>
+                    <MenuItem Header="Master">
+                        <MenuItem Header="Technology" Command="{Binding UpdateViewCommand}" CommandParameter="Technology"/>
+                        <MenuItem Header="Skill" Command="{Binding UpdateViewCommand}" CommandParameter="Skill"/>
+                    </MenuItem>
+                </Menu>
+            </Border>
+            <Grid Grid.Row="1">
+                <ContentControl Content="{Binding CurrentView}" Margin="20 0 20 0"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

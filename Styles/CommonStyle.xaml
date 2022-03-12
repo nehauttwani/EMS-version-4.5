@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/EMS;component/Styles/Button.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/DataGrid.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/CheckBox.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/RadioButton.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/PasswordBox.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/Menu.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/TabControl.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/TextBox.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/DateTime.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/ListView.xaml">
+        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/ComboBox.xaml">
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="FontFamily" Value="Calibri" />
+    </Style>
+
+</ResourceDictionary>

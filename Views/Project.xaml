@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="EMS.Views.Project"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:EMS.Views" xmlns:viewmodel="clr-namespace:EMS.ViewModel" 
+             xmlns:local2="clr-namespace:EMS.ViewModel"
+             d:DataContext="{d:DesignInstance Type=local2:ProjectViewModel}"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid Visibility="{Binding ProjectMain}">
+            <StackPanel Orientation="Vertical" Grid.Row="1">
+
+                <Label Content="Project" FontSize="30"/>
+                <Button  Content="ADD" Width="70" Height="30" HorizontalAlignment="Left" Margin="0 10 0 0" Command="{Binding ProjectOperations}" CommandParameter="AddProject" />
+                <Separator Margin="0 10 0 20"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition  Width="auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                        <Label Content="Code:" VerticalAlignment="Center" Margin="0 0 20 0"/>
+                        <Grid>
+                            <TextBox  VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="ProjectCode" Margin="5" Foreground="Black" Text="{Binding CurrentProject.ProjectCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock IsHitTestVisible="False" Text="Project Code" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=ProjectCode}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                        <Label Content="Start Date:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="12/01/21" Text="{Binding Path=CurrentProject.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="20 0 0 0">
+                        <Label Content="Name:" VerticalAlignment="Center" Margin="0 0 12 0"/>
+                        <Grid>
+                            <TextBox  VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="ProjectName" Margin="5" Foreground="Black" Text="{Binding CurrentProject.ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock IsHitTestVisible="False" Text="Project Name" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=ProjectName}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="20 0 0 0">
+                        <Label Content="End Date:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="12/31/21" Text="{Binding Path=CurrentProject.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    </StackPanel>
+                    <Grid Grid.Row="1" Grid.Column="2" Margin="40 0 0 0" HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Search" Grid.Column="0" Width="80" Command="{Binding ProjectOperations}" CommandParameter="Search" Margin="0 0 10 0"/>
+                        <Button Content="Clear" Grid.Column="1" Width="80" Command="{Binding ProjectOperations}" CommandParameter="Clear" Margin="0 0 10 0"/>
+                    </Grid>
+                </Grid>
+                <Separator Margin="0 15 0 25"/>
+                <DataGrid  AutoGenerateColumns="False" CanUserAddRows="False" Height="auto" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  CanUserResizeRows="False" CanUserResizeColumns="False" x:Name="projectTable" SelectedItem="" IsReadOnly="True" MaxHeight="200" HeadersVisibility="Column" ItemsSource="{Binding Projects}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Code" Width="2*" Binding="{Binding Path=ProjectCode}"/>
+                        <DataGridTextColumn Header="Name" Width="6*" Binding="{Binding ProjectName}"/>
+                        <DataGridTextColumn Header="Start Date" Width="3*" Binding="{Binding StartDate}"/>
+                        <DataGridTextColumn Header="End Date" Width="3*" Binding="{Binding EndDate}"/>
+                        <DataGridTemplateColumn Width="5*" Header="Actions" >
+
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+
+        </Grid>
+    <Grid Visibility="{Binding ProjectAdd}">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Project - Add" FontSize="30" Grid.Row="0" />
+                <Separator Grid.Row="1"  Margin="0 10 0 30"/>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" IsEnabled="False" Margin="0 0 0 10">
+                    <Label Content="Code:" VerticalAlignment="Center" Margin="0 0 20 0" Grid.Row="2" Grid.Column="0"/>
+                    <Grid Grid.Row="2" Grid.Column="1" Margin="20 0 0 0">
+                        <TextBox  VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="Code" Margin="5" Foreground="Black" Text="{Binding CurrentProject.ProjectCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock IsHitTestVisible="False" Text="Project Code" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=Code}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 0 0 10">
+                    <Label Content="Name:" VerticalAlignment="Center" Margin="0 0 20 0" Grid.Row="2" Grid.Column="0"/>
+                    <Grid Grid.Row="2" Grid.Column="1" Margin="15 0 0 0">
+                        <TextBox  VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="Name" Margin="5" Foreground="Black" Text="{Binding CurrentProject.ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock IsHitTestVisible="False" Text="Project Name" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=Name}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0 0 0 20">
+                    <Label Content="Start Date:" VerticalAlignment="Center"/>
+                    <DatePicker IsTodayHighlighted="True" SelectedDate="{Binding CurrentProject.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static system:DateTime.Now}}" Margin="20 0 0 0" Focusable="False"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0 0 0 20">
+                    <Label Content="End Date:" VerticalAlignment="Center"/>
+                    <DatePicker SelectedDate="{Binding CurrentProject.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static system:DateTime.Now}}"  Margin="25 0 0 0" Focusable="False"/>
+
+                </StackPanel>
+                <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0 0 0 50">
+                    <Label Content="Technology: " VerticalAlignment="Center"/>
+                    <ListView ItemsSource="{Binding}" Width="200" Margin="10 0 0 0"/>
+
+                </StackPanel>
+                <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="90 0 0 0">
+                    <Button Content="Save" Width="80" Margin="0 0 16 0" Command="{Binding ProjectOperations}" CommandParameter="SaveProject"/>
+                    <Button Content="Cancel" Width="80" Margin="16 0 0 0" Height="35" Command="{Binding ProjectOperations}" CommandParameter="Cancel"/>
+
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+    </Grid>
+
+
+</UserControl>
