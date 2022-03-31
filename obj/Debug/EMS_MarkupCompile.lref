@@ -1,8 +1,15 @@
 ﻿
-FD:\Tatvasoft training\WPF projects\EMS\EMS\App.xaml;;
-FD:\Tatvasoft training\WPF projects\EMS\EMS\Views\Dashboard.xaml;;
-FD:\Tatvasoft training\WPF projects\EMS\EMS\Views\MainWindow.xaml;;
-FD:\Tatvasoft training\WPF projects\EMS\EMS\Views\Project.xaml;;
-FD:\Tatvasoft training\WPF projects\EMS\EMS\Views\Skill.xaml;;
-FD:\Tatvasoft training\WPF projects\EMS\EMS\Views\Technology.xaml;;
+FD:\EMS\EMS\App.xaml;;
+FD:\EMS\EMS\Components\BindableConfirmPassword.xaml;;
+FD:\EMS\EMS\Components\BindablePasswordBox.xaml;;
+FD:\EMS\EMS\Views\Dashboard.xaml;;
+FD:\EMS\EMS\Views\Employee.xaml;;
+FD:\EMS\EMS\Views\MainWindow.xaml;;
+FD:\EMS\EMS\Views\Project.xaml;;
+FD:\EMS\EMS\Views\ProjectMapping.xaml;;
+FD:\EMS\EMS\Views\Skill.xaml;;
+FD:\EMS\EMS\Views\Technology.xaml;;
+FD:\EMS\EMS\Views\testing.xaml;;
+FD:\EMS\EMS\Views\EmployeeMapping.xaml;;
+FD:\EMS\EMS\Views\ViewEmployee.xaml;;
 

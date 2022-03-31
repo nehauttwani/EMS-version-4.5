@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EMS.Entities
+﻿namespace EMS.Entities
 {
-    public class Skill:EntityBase
+    public class Skill : EntityBase
     {
-        
+
         private int skillid;
         public int SkillID
         {

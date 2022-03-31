@@ -1,0 +1,103 @@
+﻿<Window x:Class="EMS.Views.EmployeeMapping"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:EMS.ViewModel" xmlns:local1="clr-namespace:EMS" d:DataContext="{d:DesignInstance Type=viewmodel:EmploeeMappingViewModel}"
+             mc:Ignorable="d"
+        Title="Employee Mapping" Height="450" Width="550" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="actions" TargetType="Button">
+            <Setter Property="Margin" Value= "20 5 10 5"/>
+
+
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" BorderBrush="White" BorderThickness="1">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="White"/>
+
+                                        </Trigger>
+
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Border.Style>
+                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel >
+            <StackPanel Orientation="Horizontal">
+            <Label Grid.Row="0"  Content="Employee mapping -" FontSize="20" Margin="10 0 0 0"/>
+                <Label Grid.Row="0"  Content="{Binding Path=Project.ProjectName, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
+            </StackPanel>
+            <Separator />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal"  Margin="0 20 0 0 " Grid.Column="0">
+                    <Label Content="Employee: " VerticalAlignment="Center" Margin="10 0 0 0"/>
+                    <ComboBox IsEditable="True" IsTextSearchEnabled="false" ItemsSource="{Binding FilteredEmployees}"  DisplayMemberPath="FullName" Text="{Binding SearchText ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="300" SelectedValuePath="FullName"
+            SelectedValue="{Binding CurrentEmployee.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding CurrentEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        
+                        <ComboBox.Triggers>
+                            <EventTrigger RoutedEvent="TextBoxBase.TextChanged">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsDropDownOpen">
+                                            <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
+                                        </BooleanAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ComboBox.Triggers>
+                    </ComboBox>
+                   
+                </StackPanel>
+                
+                    <Button Content="Save" Width="100" Margin="40 20 20 0 " Command="{Binding MappingOperations}" CommandParameter="EmployeeMap" Grid.Column="1" Height="35"/>
+                    
+                
+            </Grid>
+            <DataGrid ItemsSource="{Binding Path=MappedEmployees}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="15 50 7 50" Height="auto" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  CanUserResizeRows="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedEmployee, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" MaxHeight="200" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    
+                    <DataGridTextColumn Foreground="Black" Header="Employee Name" Width="6*" Binding="{Binding Path=FullName}"/>
+                    <DataGridTemplateColumn Header="Actions" Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource actions}" Command="{Binding DataContext.MappingOperations,RelativeSource={RelativeSource AncestorType=DataGrid, AncestorLevel=1}}"  CommandParameter="deleteQual" Height="15" Width="20">
+                                    <Image Source="C:\Users\NEHA UTTWANI\Downloads\cancel.png"/>
+                                </Button>
+
+                            </DataTemplate>
+</DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </StackPanel>
+    </Grid>
+</Window>

@@ -5,13 +5,29 @@
         
         <Setter Property="Background" Value="#70AD47"/>
         <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="Height" Value="25"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         
     </Style>
+
     
     <Style TargetType="DataGridCell">
+        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+       
         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="#000000"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected"
+                        Value="True">
+                <Setter Property="Background" Value="#60943C"/>
+                <Setter Property="BorderBrush"
+                        Value="#60943C" />
+
+            </Trigger>
+
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="DataGridRow">
         <Style.Triggers>
             <Trigger Property="IsSelected"
                         Value="True">
@@ -29,7 +45,8 @@
 
     <Style TargetType="DataGrid">
         <Setter Property="AlternatingRowBackground" Value="#EBF1E9"/>
-
+        <Setter Property="BorderBrush" Value="Green"/>
     </Style>
+    
 
 </ResourceDictionary>

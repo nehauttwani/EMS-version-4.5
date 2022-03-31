@@ -6,10 +6,48 @@
               xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:EMS.Views" xmlns:viewmodel="clr-namespace:EMS.ViewModel" 
              xmlns:local2="clr-namespace:EMS.ViewModel"
-             d:DataContext="{d:DesignInstance Type=local2:ProjectViewModel}"
-             
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=local2:ProjectViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewmodel:ProjectViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="actions" TargetType="Button">
+            <Setter Property="Margin" Value= "20 5 10 5"/>
+            
+            
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" BorderBrush="White" BorderThickness="1">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="White"/>
+
+                                        </Trigger>
+
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Border.Style>
+                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid Visibility="{Binding ProjectMain}">
             <StackPanel Orientation="Vertical" Grid.Row="1">
@@ -48,7 +86,7 @@
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
                         <Label Content="Start Date:" VerticalAlignment="Center"/>
-                        <DatePicker SelectedDate="12/01/21" Text="{Binding Path=CurrentProject.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <DatePicker SelectedDate="{Binding CurrentProject.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsTodayHighlighted="True" Focusable="False"/>
 
                     </StackPanel>
 
@@ -72,7 +110,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="20 0 0 0">
                         <Label Content="End Date:" VerticalAlignment="Center"/>
-                        <DatePicker SelectedDate="12/31/21" Text="{Binding Path=CurrentProject.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DatePicker SelectedDate="{Binding CurrentProject.EndDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsTodayHighlighted="True" Focusable="False" />
 
                     </StackPanel>
                     <Grid Grid.Row="1" Grid.Column="2" Margin="40 0 0 0" HorizontalAlignment="Right">
@@ -86,14 +124,34 @@
                     </Grid>
                 </Grid>
                 <Separator Margin="0 15 0 25"/>
-                <DataGrid  AutoGenerateColumns="False" CanUserAddRows="False" Height="auto" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  CanUserResizeRows="False" CanUserResizeColumns="False" x:Name="projectTable" SelectedItem="" IsReadOnly="True" MaxHeight="200" HeadersVisibility="Column" ItemsSource="{Binding Projects}">
+                <DataGrid  AutoGenerateColumns="False" CanUserAddRows="False" Height="auto" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  CanUserResizeRows="False" CanUserResizeColumns="False" x:Name="projectTable"  IsReadOnly="True" MaxHeight="200" HeadersVisibility="Column" ItemsSource="{Binding Path=Projects}" SelectedItem="{Binding Path=AlterProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Code" Width="2*" Binding="{Binding Path=ProjectCode}"/>
+                        <DataGridTextColumn Header="Code" Width="2*" Binding="{Binding ProjectCode}"/>
                         <DataGridTextColumn Header="Name" Width="6*" Binding="{Binding ProjectName}"/>
                         <DataGridTextColumn Header="Start Date" Width="3*" Binding="{Binding StartDate}"/>
                         <DataGridTextColumn Header="End Date" Width="3*" Binding="{Binding EndDate}"/>
-                        <DataGridTemplateColumn Width="5*" Header="Actions" >
+                        <DataGridTemplateColumn Width="5*" Header="Actions">
+                            
+                            <DataGridTemplateColumn.CellTemplate>
+                                
+                                <DataTemplate>
 
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                       
+                                        <Button Style="{StaticResource actions}" Command="{Binding DataContext.ProjectOperations,RelativeSource={RelativeSource AncestorType=DataGrid, AncestorLevel=1}}"  CommandParameter="edit">
+                                            <Image Source="C:\Users\NEHA UTTWANI\Downloads\edit.png"/>
+                                        </Button>
+                                        <Button Style="{StaticResource actions}" Command="{Binding DataContext.ProjectOperations,RelativeSource={RelativeSource AncestorType=DataGrid, AncestorLevel=1}}"  CommandParameter="Remove">
+                                            <Image Source="C:\Users\NEHA UTTWANI\Downloads\remove.png"/>
+                                        </Button>
+                                        <Button Style="{StaticResource actions}" Command="{Binding DataContext.ProjectOperations,RelativeSource={RelativeSource AncestorType=DataGrid, AncestorLevel=1}}"  CommandParameter="employeeMapping">
+                                            <Image Source="C:\Users\NEHA UTTWANI\Downloads\employees.png"/>
+                                        </Button>
+                                    </StackPanel>
+                                    
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -118,7 +176,7 @@
                 <Separator Grid.Row="1"  Margin="0 10 0 30"/>
                 <StackPanel Grid.Row="2" Orientation="Horizontal" IsEnabled="False" Margin="0 0 0 10">
                     <Label Content="Code:" VerticalAlignment="Center" Margin="0 0 20 0" Grid.Row="2" Grid.Column="0"/>
-                    <Grid Grid.Row="2" Grid.Column="1" Margin="20 0 0 0">
+                    <Grid Grid.Row="2" Grid.Column="1" Margin="24 0 0 0">
                         <TextBox  VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="Code" Margin="5" Foreground="Black" Text="{Binding CurrentProject.ProjectCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock IsHitTestVisible="False" Text="Project Code" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
                             <TextBlock.Style>
@@ -135,8 +193,8 @@
                     </Grid>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 0 0 10">
-                    <Label Content="Name:" VerticalAlignment="Center" Margin="0 0 20 0" Grid.Row="2" Grid.Column="0"/>
-                    <Grid Grid.Row="2" Grid.Column="1" Margin="15 0 0 0">
+                    <Label Content="*Name:" VerticalAlignment="Center" Margin="0 0 20 0" Grid.Row="2" Grid.Column="0"/>
+                    <Grid Grid.Row="2" Grid.Column="1" Margin="16 0 0 0">
                         <TextBox  VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="Name" Margin="5" Foreground="Black" Text="{Binding CurrentProject.ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock IsHitTestVisible="False" Text="Project Name" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
                             <TextBlock.Style>
@@ -153,17 +211,24 @@
                     </Grid>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0 0 0 20">
-                    <Label Content="Start Date:" VerticalAlignment="Center"/>
-                    <DatePicker IsTodayHighlighted="True" SelectedDate="{Binding CurrentProject.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static system:DateTime.Now}}" Margin="20 0 0 0" Focusable="False"/>
+                    <Label Content="*Start Date:" VerticalAlignment="Center"/>
+                    <DatePicker IsTodayHighlighted="True"  SelectedDate="{Binding CurrentProject.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="21 0 0 0" Focusable="False" />
                 </StackPanel>
                 <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0 0 0 20">
                     <Label Content="End Date:" VerticalAlignment="Center"/>
-                    <DatePicker SelectedDate="{Binding CurrentProject.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static system:DateTime.Now}}"  Margin="25 0 0 0" Focusable="False"/>
+                    <DatePicker  SelectedDate="{Binding CurrentProject.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Margin="30 0 0 0" Focusable="False" />
 
                 </StackPanel>
                 <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0 0 0 50">
-                    <Label Content="Technology: " VerticalAlignment="Center"/>
-                    <ListView ItemsSource="{Binding}" Width="200" Margin="10 0 0 0"/>
+                    <Label Content="*Technology: " VerticalAlignment="Center"/>
+                    <ListView ItemsSource="{Binding ProjectTechnologies}" Width="200" Margin="10 0 0 0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="auto" MaxHeight="150" SelectedItem="{Binding CurrentTechnology, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single">
+                        
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TechnologyName}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
                 </StackPanel>
                 <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="90 0 0 0">

@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 
-namespace EMS_sample.Model
+namespace EMS.Entities
 {
-    public class EmployeeQualifications: ModelBase
+    public class EmployeeQualifications : EntityBase
     {
-        EmployeeDetails employeeDetails = new EmployeeDetails();
 
 
-        private string fkemployeecode;
-        public string FK_EmployeeCode
+        private int employeeid;
+        public int EmployeeID
         {
-            set
-            {
-                fkemployeecode = employeeDetails.EmployeeCode;
-            }
+            get { return employeeid; }
+            set { employeeid = value; OnPropertyChanged("EmployeeCode"); }
         }
+
 
         private string qualification;
         public string Quailification
@@ -90,8 +84,8 @@ namespace EMS_sample.Model
             }
         }
 
-        private string percentageobtained;
-        public string PercentageObtained
+        private decimal percentageobtained;
+        public decimal PercentageObtained
         {
             get
             {
@@ -103,5 +97,25 @@ namespace EMS_sample.Model
                 OnPropertyChanged("PercentageObtained");
             }
         }
+        private bool isEditable = false;
+        public bool IsEditable
+        {
+            get { return isEditable; }
+            set { isEditable = value; OnPropertyChanged("IsEditable"); }
+        }
+        private Visibility savevisible = Visibility.Visible;
+        public Visibility SaveVisible
+        {
+            get { return savevisible; }
+            set { savevisible = value; OnPropertyChanged("SaveVisible"); }
+        }
+
+        private Visibility editvisible = Visibility.Collapsed;
+        public Visibility EditVisible
+        {
+            get { return editvisible; }
+            set { editvisible = value; OnPropertyChanged("EditVisible"); }
+        }
+
     }
 }

@@ -4,8 +4,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/EMS;component/Styles/Button.xaml">
         </ResourceDictionary>
-        <ResourceDictionary Source="/EMS;component/Styles/DataGrid.xaml">
-        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/DataGrid.xaml"/>
+
         <ResourceDictionary Source="/EMS;component/Styles/CheckBox.xaml">
         </ResourceDictionary>
         <ResourceDictionary Source="/EMS;component/Styles/RadioButton.xaml">
@@ -20,10 +20,10 @@
         </ResourceDictionary>
         <ResourceDictionary Source="/EMS;component/Styles/DateTime.xaml">
         </ResourceDictionary>
-        <ResourceDictionary Source="/EMS;component/Styles/ListView.xaml">
-        </ResourceDictionary>
-        <ResourceDictionary Source="/EMS;component/Styles/ComboBox.xaml">
-        </ResourceDictionary>
+        <ResourceDictionary Source="/EMS;component/Styles/ListView.xaml"/>
+
+        <ResourceDictionary Source="/EMS;component/Styles/ComboBox1.xaml"/>
+
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Window}">

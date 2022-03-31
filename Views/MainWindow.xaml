@@ -23,7 +23,7 @@
                     <MenuItem Header="Dashboard"
                       Command="{Binding UpdateViewCommand}" CommandParameter="Dashboard" Height="25"/>
                     <MenuItem Header="Project" Command="{Binding UpdateViewCommand}" CommandParameter="Project"/>
-                    <MenuItem Header="Employee"/>
+                    <MenuItem Header="Employee" Command="{Binding UpdateViewCommand}" CommandParameter="Employee"/>
                     <MenuItem Header="Master">
                         <MenuItem Header="Technology" Command="{Binding UpdateViewCommand}" CommandParameter="Technology"/>
                         <MenuItem Header="Skill" Command="{Binding UpdateViewCommand}" CommandParameter="Skill"/>

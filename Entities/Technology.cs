@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EMS.Entities
+﻿namespace EMS.Entities
 {
-    public class Technology: EntityBase
+    public class Technology : EntityBase
     {
         private string technologyname;
         public string TechnologyName

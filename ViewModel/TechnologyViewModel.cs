@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using EMS.Entities;
 
@@ -26,7 +22,7 @@ namespace EMS.ViewModel
             get { return altertechnology; }
             set { altertechnology = value; OnPropertyChanged("AlterTechnology"); }
         }
-        
+
         private ObservableCollection<Technology> technologies;
         public ObservableCollection<Technology> Technologies
         {
@@ -49,26 +45,26 @@ namespace EMS.ViewModel
             if (parameter.ToString() == "SaveEditOperation")
             {
 
-                    SaveEditOperation();
-                    Technologies = new ObservableCollection<Technology>();
-                    GetTechnology();
-                    CurrentTechnology = new Technology();
+                SaveEditOperation();
+                Technologies = new ObservableCollection<Technology>();
+                GetTechnology();
+                CurrentTechnology = new Technology();
 
-                
+
 
             }
-            else if(parameter.ToString() == "EditTechnology")
+            else if (parameter.ToString() == "EditTechnology")
             {
                 CurrentTechnology.TechnologyID = AlterTechnology.TechnologyID;
                 CurrentTechnology.TechnologyName = AlterTechnology.TechnologyName;
 
                 OnPropertyChanged("CurrentTechnology");
             }
-            else if(parameter.ToString() == "DeleteTechnology")
+            else if (parameter.ToString() == "DeleteTechnology")
             {
                 MessageBoxResult d;
-                d =MessageBox.Show("Do you want to delete this Technology?", "Warning", MessageBoxButton.YesNo);
-                if(d== MessageBoxResult.Yes)
+                d = MessageBox.Show("Do you want to delete this Technology?", "Warning", MessageBoxButton.YesNo);
+                if (d == MessageBoxResult.Yes)
                 {
                     DeleteTechnology(AlterTechnology);
                     Technologies = new ObservableCollection<Technology>();
@@ -77,7 +73,7 @@ namespace EMS.ViewModel
                 CurrentTechnology = new Technology();
 
             }
-            
+
         }
 
         public void GetTechnology()
@@ -121,16 +117,16 @@ namespace EMS.ViewModel
             }
         }
 
-        
+
         public void SaveEditOperation()
         {
             try
             {
 
-            int rowCount = 0;
-            string strConn = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-            SqlConnection sqlConnection = new SqlConnection(strConn);
-            SqlCommand sqlCommand = new SqlCommand();
+                int rowCount = 0;
+                string strConn = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                SqlConnection sqlConnection = new SqlConnection(strConn);
+                SqlCommand sqlCommand = new SqlCommand();
 
                 try
                 {
@@ -179,14 +175,15 @@ namespace EMS.ViewModel
                     throw ex;
                 }
 
-            }catch
+            }
+            catch
             {
                 string message = "The required field cannot be empty!";
                 MessageBox.Show(message, "Warning", MessageBoxButton.OK);
             }
         }
 
-      
+
 
         public void DeleteTechnology(Technology obj)
         {
@@ -211,7 +208,7 @@ namespace EMS.ViewModel
                     {
                         Value = obj.TechnologyName
                     };
-                    
+
                     sqlCommand.Parameters.Add(technologyName);
 
 

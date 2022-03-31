@@ -3,7 +3,6 @@ D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\EMS.exe
 D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\EMS.pdb
 D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Styles\Button.baml
 D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Styles\CheckBox.baml
-D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Styles\ComboBox.baml
 D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Styles\Commonstyle.baml
 D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Styles\DataGrid.baml
 D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Styles\DateTime.baml
@@ -34,3 +33,84 @@ D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\EMS.csproj.CoreCompileInput
 D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\EMS.exe
 D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\EMS.pdb
 D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\EMS.csproj.AssemblyReference.cache
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\Employee.g.cs
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\testing.g.cs
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\Employee.baml
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\testing.baml
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Styles\ComboBox1.baml
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\EmployeeMapping.g.cs
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\EmployeeMapping.baml
+D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
+D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\WPFToolkit.dll
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\EMS.csproj.CopyComplete
+D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\LiveCharts.dll
+D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\LiveCharts.Wpf.dll
+D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\LiveCharts.pdb
+D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\LiveCharts.xml
+D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\LiveCharts.Wpf.pdb
+D:\Tatvasoft training\WPF projects\EMS\EMS\bin\Debug\LiveCharts.Wpf.xml
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\ProjectMapping.g.cs
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\ProjectMapping.baml
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\ViewEmployee.g.cs
+D:\Tatvasoft training\WPF projects\EMS\EMS\obj\Debug\Views\ViewEmployee.baml
+D:\EMS\EMS\obj\Debug\Styles\Button.baml
+D:\EMS\EMS\obj\Debug\Styles\CheckBox.baml
+D:\EMS\EMS\obj\Debug\Styles\ComboBox1.baml
+D:\EMS\EMS\obj\Debug\Styles\Commonstyle.baml
+D:\EMS\EMS\obj\Debug\Styles\DataGrid.baml
+D:\EMS\EMS\obj\Debug\Styles\DateTime.baml
+D:\EMS\EMS\obj\Debug\Styles\ListView.baml
+D:\EMS\EMS\obj\Debug\Styles\Menu.baml
+D:\EMS\EMS\obj\Debug\Styles\PasswordBox.baml
+D:\EMS\EMS\obj\Debug\Styles\RadioButton.baml
+D:\EMS\EMS\obj\Debug\Styles\TabControl.baml
+D:\EMS\EMS\obj\Debug\Styles\TextBox.baml
+D:\EMS\EMS\obj\Debug\Components\BindablePasswordBox.g.cs
+D:\EMS\EMS\obj\Debug\Views\Dashboard.g.cs
+D:\EMS\EMS\obj\Debug\Views\Employee.g.cs
+D:\EMS\EMS\obj\Debug\Views\MainWindow.g.cs
+D:\EMS\EMS\obj\Debug\Views\Project.g.cs
+D:\EMS\EMS\obj\Debug\Views\ProjectMapping.g.cs
+D:\EMS\EMS\obj\Debug\Views\Skill.g.cs
+D:\EMS\EMS\obj\Debug\Views\Technology.g.cs
+D:\EMS\EMS\obj\Debug\Views\testing.g.cs
+D:\EMS\EMS\obj\Debug\Views\EmployeeMapping.g.cs
+D:\EMS\EMS\obj\Debug\Views\ViewEmployee.g.cs
+D:\EMS\EMS\obj\Debug\App.g.cs
+D:\EMS\EMS\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\EMS\EMS\obj\Debug\EMS_MarkupCompile.cache
+D:\EMS\EMS\obj\Debug\EMS_MarkupCompile.lref
+D:\EMS\EMS\bin\Debug\EMS.exe.config
+D:\EMS\EMS\bin\Debug\EMS.exe
+D:\EMS\EMS\bin\Debug\EMS.pdb
+D:\EMS\EMS\bin\Debug\LiveCharts.dll
+D:\EMS\EMS\bin\Debug\LiveCharts.Wpf.dll
+D:\EMS\EMS\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
+D:\EMS\EMS\bin\Debug\WPFToolkit.dll
+D:\EMS\EMS\bin\Debug\LiveCharts.pdb
+D:\EMS\EMS\bin\Debug\LiveCharts.xml
+D:\EMS\EMS\bin\Debug\LiveCharts.Wpf.pdb
+D:\EMS\EMS\bin\Debug\LiveCharts.Wpf.xml
+D:\EMS\EMS\obj\Debug\App.baml
+D:\EMS\EMS\obj\Debug\Components\BindablePasswordBox.baml
+D:\EMS\EMS\obj\Debug\Views\Dashboard.baml
+D:\EMS\EMS\obj\Debug\Views\Employee.baml
+D:\EMS\EMS\obj\Debug\Views\MainWindow.baml
+D:\EMS\EMS\obj\Debug\Views\Project.baml
+D:\EMS\EMS\obj\Debug\Views\ProjectMapping.baml
+D:\EMS\EMS\obj\Debug\Views\Skill.baml
+D:\EMS\EMS\obj\Debug\Views\Technology.baml
+D:\EMS\EMS\obj\Debug\Views\testing.baml
+D:\EMS\EMS\obj\Debug\Views\EmployeeMapping.baml
+D:\EMS\EMS\obj\Debug\Views\ViewEmployee.baml
+D:\EMS\EMS\obj\Debug\EMS.g.resources
+D:\EMS\EMS\obj\Debug\EMS.Properties.Resources.resources
+D:\EMS\EMS\obj\Debug\EMS.csproj.GenerateResource.cache
+D:\EMS\EMS\obj\Debug\EMS.csproj.CoreCompileInputs.cache
+D:\EMS\EMS\obj\Debug\EMS.csproj.CopyComplete
+D:\EMS\EMS\obj\Debug\EMS.exe
+D:\EMS\EMS\obj\Debug\EMS.pdb
+D:\EMS\EMS\obj\Debug\EMS.csproj.AssemblyReference.cache
+D:\EMS\EMS\obj\Debug\Components\BindableConfirmPassword.g.cs
+D:\EMS\EMS\obj\Debug\Components\BindableConfirmPassword.baml

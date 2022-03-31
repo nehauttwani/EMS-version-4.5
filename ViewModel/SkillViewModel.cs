@@ -4,16 +4,14 @@ using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using EMS.Entities;
 
 namespace EMS.ViewModel
 {
-    public class SkillViewModel: ViewModelBase
+    public class SkillViewModel : ViewModelBase
     {
+        SqlConnectionMethod method = new SqlConnectionMethod();
         private Skill currentskill;
         public Skill CurrentSkill
         {
@@ -83,17 +81,12 @@ namespace EMS.ViewModel
         public void GetSkill()
         {
             //int rowcount = 0;
-            string strConn = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-            SqlConnection sqlConnection = new SqlConnection(strConn);
-            SqlCommand sqlCommand = new SqlCommand();
-
+            List<object> parameters = method.Command("GetSkill");
+            SqlConnection sqlConnection = (SqlConnection)parameters[1];
+            SqlCommand sqlCommand = (SqlCommand)parameters[0];
             try
             {
-                // Settings.  
-                sqlCommand.CommandText = "GetSkill";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Connection = sqlConnection;
-                sqlCommand.CommandTimeout = 108; //// Setting timeeout for longer queries to 12 hours.  
+
 
                 // Open.  
                 sqlConnection.Open();
@@ -161,20 +154,20 @@ namespace EMS.ViewModel
                         sqlCommand.Parameters.Add(skillName);
                         sqlCommand.Parameters.Add(skillId);
 
-                   
 
 
 
-                    // Open.  
-                    sqlConnection.Open();
 
-                    // Result.
+                        // Open.  
+                        sqlConnection.Open();
 
-                    rowCount = sqlCommand.ExecuteNonQuery();
+                        // Result.
 
-                    // Close.  
-                    sqlConnection.Close();
-                }
+                        rowCount = sqlCommand.ExecuteNonQuery();
+
+                        // Close.  
+                        sqlConnection.Close();
+                    }
                 }
                 catch (Exception ex)
                 {

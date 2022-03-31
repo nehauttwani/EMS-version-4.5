@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using EMS.Entities;
+﻿using System.Windows.Controls;
 
 namespace EMS.ViewModel
 {
@@ -23,7 +16,7 @@ namespace EMS.ViewModel
         }
         public RelayCommand UpdateViewCommand { get; set; }
 
-        
+
         void ShowUserControl(object parameter)
         {
 
@@ -44,7 +37,11 @@ namespace EMS.ViewModel
             {
                 CurrentView = new Views.Project();
             }
-            
+            else if (parameter.ToString() == "Employee")
+            {
+                CurrentView = new Views.Employee();
+            }
+
         }
         public MainWindowViewModel()
         {

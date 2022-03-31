@@ -1,13 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EMS.Entities
 {
     public class Project : EntityBase
     {
+        private int projectid;
+        public int ProjectId
+        {
+            get
+            {
+                return projectid;
+            }
+            set
+            {
+                projectid = value;
+                OnPropertyChanged("ProjectId");
+            }
+        }
+
         private string projectcode;
         public string ProjectCode
         {
@@ -36,30 +46,27 @@ namespace EMS.Entities
             }
         }
 
-        private DateTime startdate;
-        public DateTime StartDate
+        private DateTime? _startdate;
+        public DateTime? StartDate
         {
-            get
-            {
-                return startdate;
-            }
+            get { return _startdate; }
             set
             {
-                startdate = value;
+                _startdate = value;
                 OnPropertyChanged("StartDate");
             }
         }
 
-        private DateTime enddate;
-        public DateTime EndDate
+        private DateTime? _enddate;
+        public DateTime? EndDate
         {
             get
             {
-                return enddate;
+                return _enddate;
             }
             set
             {
-                enddate = value;
+                _enddate = value;
                 OnPropertyChanged("EndDate");
             }
         }

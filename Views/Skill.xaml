@@ -37,12 +37,12 @@
                 <Button Content="Save" Width="100" Margin="0 0 20 0 " Command="{Binding SkillOperations}" CommandParameter="SaveEditSkill"/>
                 <Button Content="Edit" Width="100" Margin="0 0 20 0 " IsEnabled="{Binding ElementName=skillTable, Path=SelectedItems.Count}" Command="{Binding SkillOperations}" CommandParameter="EditSkill"/>
 
-                <Button Content="Delete" x:Name="delete" Width="100" Margin="0 0 20 0 " IsEnabled="{Binding ElementName=skillTable, Path=SelectedItems.Count}" Command="{Binding SkillOperations}" CommandParameter="DeleteSkill" >
+                <Button Content="Delete" x:Name="delete" Width="100" IsEnabled="{Binding ElementName=skillTable, Path=SelectedItems.Count}" Command="{Binding SkillOperations}" CommandParameter="DeleteSkill" >
 
                 </Button>
             </StackPanel>
         </Grid>
-        <DataGrid ItemsSource="{Binding Path=Skills}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="40 50 50 50" Height="auto" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  CanUserResizeRows="False" CanUserResizeColumns="False" x:Name="skillTable" SelectedItem="{Binding AlterSkill, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" MaxHeight="200" HeadersVisibility="Column">
+        <DataGrid ItemsSource="{Binding Path=Skills}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0 50 0 50" Height="auto" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  CanUserResizeRows="False" CanUserResizeColumns="False" x:Name="skillTable" SelectedItem="{Binding AlterSkill, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" MaxHeight="200" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="ID" Width="1*" Binding="{Binding Path=SkillID}"/>
                 <DataGridTextColumn Header="Skill" Width="6*" Binding="{Binding Path=SkillName}"/>

@@ -1,14 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security;
 
-namespace EMS_sample.Model
+namespace EMS.Entities
 {
-    public class EmployeeDetails: ModelBase
-
+    public class EmployeeDetails : EntityBase
     {
+        private int employeeid;
+        public int EmployeeID
+        {
+            get
+            {
+                return employeeid;
+            }
+            set
+            {
+                employeeid = value;
+                OnPropertyChanged("EmployeeID");
+            }
+        }
+
         private string employeecode;
         public string EmployeeCode
         {
@@ -79,6 +89,7 @@ namespace EMS_sample.Model
             }
         }
 
+
         private string confirmpassword;
         public string ConfirmPassword
         {
@@ -93,144 +104,66 @@ namespace EMS_sample.Model
             }
         }
 
-        private int departmentid;
-        public int DepartmentId
+        private Department department;
+        public Department Department
         {
             get
             {
-                return departmentid;
+                return department;
             }
             set
             {
-                departmentid = value;
-                OnPropertyChanged("DepartmentId");
+                department = value;
+                OnPropertyChanged("Department");
             }
         }
 
-        private int designationid;
-        public int DesignationId
+        private Designation designation;
+        public Designation Designation
         {
             get
             {
-                return designationid;
+                return designation;
             }
             set
             {
-                designationid = value;
-                OnPropertyChanged("DesignationId");
+                designation = value;
+                OnPropertyChanged("Designation");
             }
         }
 
-        private DateTime joiningdate;
-        public DateTime JoiningDate
+        private DateTime? _joiningdate;
+        public DateTime? JoiningDate
         {
             get
             {
-                return joiningdate;
+                return _joiningdate;
             }
             set
             {
-                joiningdate = value;
+                _joiningdate = value;
                 OnPropertyChanged("JoiningDate");
             }
         }
 
-        private DateTime releasedate;
-        public DateTime ReleaseDate
+        private DateTime? _releasedate;
+        public DateTime? ReleaseDate
         {
             get
             {
-                return releasedate;
+                return _releasedate;
             }
             set
             {
-                releasedate = value;
+                _releasedate = value;
                 OnPropertyChanged("ReleaseDate");
             }
         }
-
-        private DateTime dob;
-        public DateTime DOB
+        private string fullname;
+        public string FullName
         {
-            get
-            {
-                return dob;
-            }
-            set
-            {
-                dob = value;
-                OnPropertyChanged("DOB");
-            }
-        }
-
-        private int contactnumber;
-        public int ContactNumber
-        {
-            get
-            {
-                return contactnumber;
-            }
-            set
-            {
-                contactnumber = value;
-                OnPropertyChanged("ContactNumber");
-            }
-        }
-
-        private int genderid;
-        public int GenderId
-        {
-            get
-            {
-                return genderid;
-            }
-            set
-            {
-                genderid = value;
-                OnPropertyChanged("GenderId");
-            }
-        }
-
-        private int statusid;
-        public int StatusId
-        {
-            get
-            {
-                return statusid;
-            }
-            set
-            {
-                statusid = value;
-                OnPropertyChanged("StatusId");
-            }
-        }
-
-        private string presentaddress;
-        public string PresentAddress
-        {
-            get
-            {
-                return presentaddress;
-            }
-            set
-            {
-                presentaddress = value;
-                OnPropertyChanged("PresentAddress");
-            }
-        }
-
-        private string permanentaddress;
-        public string PermanentAddress
-        {
-            get
-            {
-                return permanentaddress;
-            }
-            set
-            {
-                permanentaddress = value;
-                OnPropertyChanged("PermanentAddress");
-            }
+            get { fullname = firstname + " " + lastname; return fullname; }
+            set { fullname = firstname + " " + lastname; OnPropertyChanged("FullName"); }
         }
 
     }

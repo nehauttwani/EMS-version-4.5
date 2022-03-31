@@ -1,26 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Windows;
 
-namespace EMS_sample.Model
+namespace EMS.Entities
 {
-    public class EmployeeExperience: ModelBase
+    public class EmployeeExperience : EntityBase
     {
-        EmployeeDetails employeeDetails = new EmployeeDetails();
 
-
-        private string fkemployeecode;
-        public string FK_EmployeeCode
+        private int employeeid;
+        public int EmployeeID
         {
-            set
-            {
-                fkemployeecode = employeeDetails.EmployeeCode;
-            }
+            get { return employeeid; }
+            set { employeeid = value; OnPropertyChanged("EmployeeID"); }
         }
-  
-        
+
+
         private string lastorganization;
         public string LastOrganization
         {
@@ -35,46 +29,89 @@ namespace EMS_sample.Model
             }
         }
 
-        private string lastdesignation;
-        public string LastDesignation
+        private Designation designation;
+        public Designation Designation
         {
             get
             {
-                return lastdesignation;
+                return designation;
             }
             set
             {
-                lastdesignation = value;
-                OnPropertyChanged("LastDesignation");
+                designation = value;
+                OnPropertyChanged("Designation");
             }
         }
 
-        private DateTime datefrom;
-        public DateTime DateFrom
+        private DateTime? _datefrom;
+        public DateTime? DateFrom
         {
             get
             {
-                return datefrom;
+                return _datefrom;
             }
             set
             {
-                datefrom = value;
+                _datefrom = value;
                 OnPropertyChanged("DateFrom");
             }
         }
 
-        private DateTime todate;
-        public DateTime ToDate
+        private DateTime? _todate;
+        public DateTime? ToDate
         {
             get
             {
-                return todate;
+                return _todate;
             }
             set
             {
-                todate = value;
+                _todate = value;
                 OnPropertyChanged("ToDate");
             }
+        }
+
+        private ObservableCollection<Designation> designations;
+        public ObservableCollection<Designation> Designations
+        {
+            get { return designations; }
+            set { designations = value; OnPropertyChanged("Designations"); }
+        }
+
+       
+        private int? duration;
+        public int? Duration
+        {
+            get
+            {
+
+                return duration;
+            }
+            set
+            {
+                duration = value;
+                OnPropertyChanged("Duration");
+            }
+        }
+
+        private bool isEditable = false;
+        public bool IsEditable
+        {
+            get { return isEditable; }
+            set { isEditable = value; OnPropertyChanged("IsEditable"); }
+        }
+        private Visibility savevisible = Visibility.Visible;
+        public Visibility SaveVisible
+        {
+            get { return savevisible; }
+            set { savevisible = value; OnPropertyChanged("SaveVisible"); }
+        }
+
+        private Visibility editvisible = Visibility.Collapsed;
+        public Visibility EditVisible
+        {
+            get { return editvisible; }
+            set { editvisible = value; OnPropertyChanged("EditVisible"); }
         }
     }
 }
