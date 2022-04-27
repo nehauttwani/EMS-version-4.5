@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EMS.Views" xmlns:viewmodel="clr-namespace:EMS.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ViewEmployeeViewModel}"
         mc:Ignorable="d"
-        Title="ViewEmployee" Height="450" Width="800">
+        Title="Employee Profile" Height="450" Width="700" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>

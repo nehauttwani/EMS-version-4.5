@@ -85,7 +85,7 @@
                     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
                         <Label Content="Department:" VerticalAlignment="Center" />
                         <ComboBox Width="200" ItemsSource="{Binding Path=Departments}" SelectedValue="DepartmentValue" SelectedValuePath="{Binding CurrentEmployee.EmployeeDetails.Department.DepartmentValue ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding CurrentEmployee.EmployeeDetails.Department , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
+                          SelectedItem="{Binding CurrentEmployee.EmployeeDetails.Department , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" Height="32">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -118,7 +118,7 @@
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="20 0 0 0">
                         <Label Content="Designation:" VerticalAlignment="Center" />
                         <ComboBox Width="200" ItemsSource="{Binding Designations}" SelectedValue="DesignationValue" SelectedValuePath="{Binding CurrentEmployee.EmployeeDetails.Designation.DesignationValue ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding CurrentEmployee.EmployeeDetails.Designation , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}">
+                          SelectedItem="{Binding CurrentEmployee.EmployeeDetails.Designation , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" Height="32">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -185,7 +185,7 @@
                                         <Button Style="{StaticResource actions}" Command="{Binding DataContext.EmployeeOperations,RelativeSource={RelativeSource AncestorType=DataGrid, AncestorLevel=1}}" CommandParameter="viewEmployee" Margin="5 0 -10 0">
                                             <Image Source="C:\Users\NEHA UTTWANI\Downloads\view.png" />
                                         </Button>
-                                        <Button Style="{StaticResource actions}" Command="{Binding DataContext.EmployeeOperations,RelativeSource={RelativeSource AncestorType=DataGrid, AncestorLevel=1}}" CommandParameter="edit" Margin="20 0 -10 0">
+                                        <Button Style="{StaticResource actions}" Command="{Binding DataContext.EmployeeOperations,RelativeSource={RelativeSource AncestorType=DataGrid, AncestorLevel=1}}" CommandParameter="editEmployee" Margin="20 0 -10 0">
                                             <Image Source="C:\Users\NEHA UTTWANI\Downloads\edit.png" />
                                         </Button>
                                         <Button Style="{StaticResource actions}" Command="{Binding DataContext.EmployeeOperations,RelativeSource={RelativeSource AncestorType=DataGrid, AncestorLevel=1}}" CommandParameter="Remove" Margin="20 0 -10 0">

@@ -16,31 +16,23 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="Black" BorderThickness="3,3,3,3"  Height="180" Margin="5" Width="300" Grid.Row="0" Grid.Column="0">
+        <Border BorderBrush="Black" BorderThickness="3,3,3,3"  Height="180" Margin="5" Width="350" Grid.Row="0" Grid.Column="0">
             <StackPanel Orientation="Vertical">
 
                 <Label Content="Designation-wise Employees" HorizontalAlignment="Center" FontWeight="Medium" FontSize="15"/>
-                <lvc:PieChart LegendLocation="Bottom" Hoverable="True" DataTooltip="{x:Null}" Height="120" >
-                    <lvc:PieChart.Series>
-                        <lvc:PieSeries Title="Maria" Values="3" DataLabels="True"
-                               LabelPoint="{Binding PointLabel}"/>
-                        <lvc:PieSeries Title="Charles" Values="4" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-                        <lvc:PieSeries Title="Frida" Values="6" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-                        <lvc:PieSeries Title="Frederic" Values="2" DataLabels="True" 
-                               LabelPoint="{Binding PointLabel}"/>
-                    </lvc:PieChart.Series>
+                <lvc:PieChart LegendLocation="Bottom" Hoverable="True" DataTooltip="{x:Null}" Height="120" Series="{Binding Collection}" >
+                       
+
                 </lvc:PieChart>
             </StackPanel>
         </Border>
-        <Border BorderBrush="Green" BorderThickness="3,3,3,3"  Height="180" Margin="5" Width="300" Grid.Row="0" Grid.Column="1">
+        <Border BorderBrush="Green" BorderThickness="3,3,3,3"  Height="180" Margin="5" Width="350" Grid.Row="0" Grid.Column="1">
 
         </Border>
-        <Border BorderBrush="Green" BorderThickness="3,3,3,3"  Height="180" Margin="5" Width="300" Grid.Row="1" Grid.Column="0">
+        <Border BorderBrush="Green" BorderThickness="3,3,3,3"  Height="180" Margin="5" Width="350" Grid.Row="1" Grid.Column="0">
 
         </Border>
-        <Border BorderBrush="Green" BorderThickness="3,3,3,3"  Height="180" Margin="5" Width="300" Grid.Row="1" Grid.Column="1">
+        <Border BorderBrush="Green" BorderThickness="3,3,3,3"  Height="180" Margin="5" Width="350" Grid.Row="1" Grid.Column="1">
 
         </Border>
     </Grid>

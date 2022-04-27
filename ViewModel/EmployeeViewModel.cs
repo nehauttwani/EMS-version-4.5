@@ -156,6 +156,13 @@ namespace EMS.ViewModel
             get { return currentemployee; }
             set { currentemployee = value; OnPropertyChanged("CurrentEmployee"); }
         }
+
+        private Model.Employee editemployee;
+        public Model.Employee EditEmployee
+        {
+            get { return editemployee; }
+            set { editemployee = value; OnPropertyChanged("EditEmployee"); }
+        }
         private EmployeeDetails alteremployee;
         public EmployeeDetails AlterEmployee
         {
@@ -199,7 +206,7 @@ namespace EMS.ViewModel
                     break;
                 case "SaveEmployee":
 
-                    SaveEmployee();
+                    SaveEditEmployeeDetails();
                     SelectedTab++;
                     break;
                 case "SameAddress":
@@ -241,6 +248,7 @@ namespace EMS.ViewModel
                     //CurrentQual.IsEditable = true;
 
                     break;
+
                 case "AddRowEx":
                     AlterExp = new EmployeeExperience();
                     AlterExp.Designations = new ObservableCollection<Designation>();
@@ -351,6 +359,7 @@ namespace EMS.ViewModel
                     SaveEx();
                     EmployeeMain = Visibility.Visible;
                     EmployeeAdd = Visibility.Collapsed;
+                    Employees = new ObservableCollection<EmployeeDetails>();
                     GetEmployee();
                     break;
                 case "viewEmployee":
@@ -383,8 +392,48 @@ namespace EMS.ViewModel
                     Employees = new ObservableCollection<EmployeeDetails>();
                     GetEmployee();
                     break;
+                case "Remove":
+                    MessageBoxResult message;
+                    message = MessageBox.Show("Do you want to delete " + AlterEmployee.FullName + " ? ", "Warning", MessageBoxButton.YesNo);
+                    if (message == MessageBoxResult.Yes)
+                    {
+                        RemoveEmployee(AlterEmployee);
+                        Employees = new ObservableCollection<EmployeeDetails>();
+                        GetEmployee();
+                    }
+                    CurrentEmployee = new Model.Employee();
+                    break;
 
+                case "editEmployee":
+                    EmployeeMain = Visibility.Collapsed;
+                    EmployeeAdd = Visibility.Visible;
+
+                    CurrentEmployee = new Model.Employee();
+                    CurrentEmployee.EmployeeDetails = new EmployeeDetails();
+                    CurrentEmployee.PersonalDetails = new EmployeePersonalDetails();
+                    CurrentEmployee.EmployeeQualifications = new ObservableCollection<EmployeeQualifications>();
+                    CurrentEmployee.EmployeeExperience = new ObservableCollection<EmployeeExperience>();
+                    CurrentEmployee.EmployeeDetails.Designation = new Designation();
+                    CurrentEmployee.EmployeeDetails.Department = new Department();
                     
+                    
+                    EditEmployee = new Model.Employee();
+                    EditEmployee.EmployeeDetails = new EmployeeDetails();
+                    EditEmployee.PersonalDetails = new EmployeePersonalDetails();
+                    EditEmployee.EmployeeQualifications = new ObservableCollection<EmployeeQualifications>();
+                    EditEmployee.EmployeeExperience = new ObservableCollection<EmployeeExperience>();
+                    EditEmployee.EmployeeDetails.Designation = new Designation();
+                    EditEmployee.EmployeeDetails.Department = new Department();
+                    
+
+                    GetEmployeeDetails();
+                    GetEmpEx();
+                    GetEmpQual();
+                    GetPersonalDetails();
+                    EditEmployee.EmployeeDetails.ConfirmPassword = EditEmployee.EmployeeDetails.Password;
+                    CurrentEmployee = EditEmployee;
+                    OnPropertyChanged("CurrentEmployee");
+                    break;
 
 
 
@@ -527,12 +576,12 @@ namespace EMS.ViewModel
                 throw ex;
             }
         }
-        public void SaveEmployee()
+        public void SaveEditEmployeeDetails()
         {
             try
             {
 
-                List<object> parameters = method.Command("SaveEmployee");
+                List<object> parameters = method.Command("SaveEditEmployeeDetails");
                 SqlConnection sqlConnection = (SqlConnection)parameters[1];
                 //MyConverter myConverter = new MyConverter();
 
@@ -559,7 +608,7 @@ namespace EMS.ViewModel
                     sqlCommand.Parameters.AddWithValue("@MaritalStatus", (int)Enum.Parse(typeof(MaritalStatus), SelectedMaritalState));
                     sqlCommand.Parameters.AddWithValue("@PresentAddress", CurrentEmployee.PersonalDetails.PresentAddress);
                     sqlCommand.Parameters.AddWithValue("@PermanentAddress", CurrentEmployee.PersonalDetails.PermanentAddress);
-
+                    sqlCommand.Parameters.AddWithValue("@EmployeeCode", CurrentEmployee.EmployeeDetails.EmployeeCode ?? string.Empty);
 
                     if (CurrentEmployee.EmployeeDetails.ReleaseDate == null)
                     {
@@ -884,67 +933,272 @@ namespace EMS.ViewModel
             }
         }
 
-        //public void RemoveEmployee(EmployeeDetails obj)
-        //{
-        //    try
-        //    {
+        public void RemoveEmployee(EmployeeDetails obj)
+        {
+            try
+            {
 
-        //        int rowCount = 0;
-        //        string strConn = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-        //        SqlConnection sqlConnection = new SqlConnection(strConn);
-        //        SqlCommand sqlCommand = new SqlCommand();
+                int rowCount = 0;
+                string strConn = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                SqlConnection sqlConnection = new SqlConnection(strConn);
+                SqlCommand sqlCommand = new SqlCommand();
 
-        //        try
-        //        {
+                try
+                {
 
-        //            // Settings.  
-        //            sqlCommand.CommandText = "RemoveProject";
-        //            sqlCommand.CommandType = CommandType.StoredProcedure;
-        //            sqlCommand.Connection = sqlConnection;
-        //            sqlCommand.CommandTimeout = 180;
+                    // Settings.  
+                    sqlCommand.CommandText = "RemoveEmployee";
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Connection = sqlConnection;
+                    sqlCommand.CommandTimeout = 180;
 
-        //            sqlCommand.Parameters.AddWithValue("@ProjectCode", obj.ProjectCode);
-        //            RemoveMappedTechnology();
+                    sqlCommand.Parameters.AddWithValue("@EmployeeCode", obj.EmployeeCode);
+
+                    // Open.  
+                    sqlConnection.Open();
+
+                    // Result.
+
+                    rowCount = sqlCommand.ExecuteNonQuery();
+
+                    // Close.  
+                    sqlConnection.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    // Close.  
+                    sqlConnection.Close();
+
+                    throw ex;
+                }
+
+            }
+            catch
+            {
+                string message = "The required field cannot be empty!";
+                MessageBox.Show(message, "Warning", MessageBoxButton.OK);
+            }
+        }
+
+        // ----------------- Employee Edit Functions -------------
+
+        public void GetEmployeeDetails()
+        {
+            //int rowcount = 0;
+            List<object> parameters = method.Command("GetEmployeeDetails");
+            SqlConnection sqlConnection = (SqlConnection)parameters[1];
+            SqlCommand sqlCommand = (SqlCommand)parameters[0];
+
+            try
+            {
+
+                sqlCommand.Parameters.AddWithValue("@EmployeeCode", AlterEmployee.EmployeeCode);
+                // Open.  
+                sqlConnection.Open();
+
+                // Result.  
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        EditEmployee.EmployeeDetails.EmployeeID = Convert.ToInt32(reader[0]);
+                        EditEmployee.EmployeeDetails.EmployeeCode = Convert.ToString(reader[1]);
+                        EditEmployee.EmployeeDetails.FirstName = Convert.ToString(reader[2]);
+                        EditEmployee.EmployeeDetails.LastName = Convert.ToString(reader[3]);
+                        EditEmployee.EmployeeDetails.Email = Convert.ToString(reader[4]);
+                        EditEmployee.EmployeeDetails.Password = Convert.ToString(reader[5]);
+                        EditEmployee.EmployeeDetails.JoiningDate = Convert.ToDateTime(reader[8]);
 
 
-        //            // Open.  
-        //            sqlConnection.Open();
+                        if (reader[9] == DBNull.Value)
+                        {
+                            EditEmployee.EmployeeDetails.ReleaseDate = null;
+                        }
+                        else
+                        {
 
-        //            // Result.
+                            EditEmployee.EmployeeDetails.ReleaseDate = Convert.ToDateTime(reader[9]);
+                        }
+                        EditEmployee.EmployeeDetails.Department.DepartmentId = Convert.ToInt32(reader[6]);
+                        EditEmployee.EmployeeDetails.Designation.DesignationId = Convert.ToInt32(reader[7]);
+                        foreach (Designation item in Designations)
+                        {
+                            if (item.DesignationId == EditEmployee.EmployeeDetails.Designation.DesignationId)
+                            {
+                                EditEmployee.EmployeeDetails.Designation.DesignationValue = item.DesignationValue;
+                            }
+                        }
+                        foreach (Department item in Departments)
+                        {
+                            if (item.DepartmentId == EditEmployee.EmployeeDetails.Department.DepartmentId)
+                            {
+                                EditEmployee.EmployeeDetails.Department.DepartmentValue = item.DepartmentValue;
+                            }
+                        }
 
-        //            rowCount = sqlCommand.ExecuteNonQuery();
+                    }
+                }
 
-        //            // Close.  
-        //            sqlConnection.Close();
+                // Close.  
+                sqlConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Close.  
+                sqlConnection.Close();
 
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            // Close.  
-        //            sqlConnection.Close();
+                throw ex;
+            }
+        }
 
-        //            throw ex;
-        //        }
+        public void GetPersonalDetails()
+        {
+            //int rowcount = 0;
+            List<object> parameters = method.Command("GetPersonalDetails");
+            SqlConnection sqlConnection = (SqlConnection)parameters[1];
+            SqlCommand sqlCommand = (SqlCommand)parameters[0];
 
-        //    }
-        //    catch
-        //    {
-        //        string message = "The required field cannot be empty!";
-        //        MessageBox.Show(message, "Warning", MessageBoxButton.OK);
-        //    }
-        //}
+            try
+            {
+
+                sqlCommand.Parameters.AddWithValue("@EmployeeID", EditEmployee.EmployeeDetails.EmployeeID);
+                // Open.  
+                sqlConnection.Open();
+
+                // Result.  
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        EditEmployee.PersonalDetails.DOB = Convert.ToDateTime(reader[0]);
+                        EditEmployee.PersonalDetails.ContactNumber = Convert.ToInt32(reader[1]);
+                        EditEmployee.PersonalDetails.GenderId = Convert.ToInt32(reader[2]);
+                        EditEmployee.PersonalDetails.StatusId = Convert.ToInt32(reader[3]);
+                        EditEmployee.PersonalDetails.PresentAddress = Convert.ToString(reader[4]);
+                        EditEmployee.PersonalDetails.PermanentAddress = Convert.ToString(reader[5]);
+                       
+                    }
+                }
+
+                // Close.  
+                sqlConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Close.  
+                sqlConnection.Close();
+
+                throw ex;
+            }
+        }
+
+        public void GetEmpQual()
+        {
+            //int rowcount = 0;
+            List<object> parameters = method.Command("GetEmpQual");
+            SqlConnection sqlConnection = (SqlConnection)parameters[1];
+            SqlCommand sqlCommand = (SqlCommand)parameters[0];
+
+            try
+            {
+
+                sqlCommand.Parameters.AddWithValue("@EmployeeID", EditEmployee.EmployeeDetails.EmployeeID);
+                // Open.  
+                sqlConnection.Open();
+
+                // Result.  
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        EmployeeQualifications temp = new EmployeeQualifications();
+                        temp.Quailification = Convert.ToString(reader[0]);
+                        temp.Board = Convert.ToString(reader[1]);
+                        temp.Institute = Convert.ToString(reader[2]);
+                        temp.InstituteState = Convert.ToString(reader[3]);
+                        temp.PassingYear = Convert.ToInt32(reader[4]);
+                        temp.PercentageObtained = Convert.ToInt32(reader[5]);
+                        temp.IsEditable = false;
+                        EditEmployee.EmployeeQualifications.Add(temp);
+                    }
+                }
+
+                // Close.  
+                sqlConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Close.  
+                sqlConnection.Close();
+
+                throw ex;
+            }
+        }
+
+        public void GetEmpEx()
+        {
+            //int rowcount = 0;
+            List<object> parameters = method.Command("GetEmpEx");
+            SqlConnection sqlConnection = (SqlConnection)parameters[1];
+            SqlCommand sqlCommand = (SqlCommand)parameters[0];
+
+            try
+            {
+
+                sqlCommand.Parameters.AddWithValue("@EmployeeID", EditEmployee.EmployeeDetails.EmployeeID);
+                // Open.  
+                sqlConnection.Open();
+
+                // Result.  
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        EmployeeExperience temp = new EmployeeExperience();
+                        temp.Designation = new Designation();
+                        temp.LastOrganization = Convert.ToString(reader[0]);
+                        temp.DateFrom = Convert.ToDateTime(reader[1]);
+                        temp.ToDate = Convert.ToDateTime(reader[2]);
+                        temp.Designation.DesignationId = Convert.ToInt32(reader[3]);
+                        temp.IsEditable = false;
+                        EditEmployee.EmployeeExperience.Add(temp);
+                    }
+                }
+
+                // Close.  
+                sqlConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                // Close.  
+                sqlConnection.Close();
+
+                throw ex;
+            }
+        }
+
+
         public EmployeeViewModel()
         {
             //MessageBox.Show(Convert.ToString(Address), "warning", MessageBoxButton.OK);
             MaritalState = new List<string>();
             EmployeeOperations = new RelayCommand(Operations);
-            CurrentEmployee = new Model.Employee();
+            
             GetEmployee1 = new EmployeeDetails();
-
             AlterEmployee = new EmployeeDetails();
-
-            CurrentEmployee.EmployeeDetails = new EmployeeDetails();
-            CurrentEmployee.PersonalDetails = new EmployeePersonalDetails();
+            EditEmployee = new Model.Employee();
+            EditEmployee.EmployeeDetails = new EmployeeDetails();
+            EditEmployee.PersonalDetails = new EmployeePersonalDetails();
+            EditEmployee.EmployeeQualifications = new ObservableCollection<EmployeeQualifications>();
+            EditEmployee.EmployeeExperience = new ObservableCollection<EmployeeExperience>();
+            EditEmployee.EmployeeDetails.Designation = new Designation();
+            EditEmployee.EmployeeDetails.Department = new Department();
+            
             Employees = new ObservableCollection<EmployeeDetails>();
             Departments = new ObservableCollection<Department>();
             Designations = new ObservableCollection<Designation>();
@@ -953,11 +1207,15 @@ namespace EMS.ViewModel
             CurrentExp = new EmployeeExperience();
             AlterExp = new EmployeeExperience();
             AlterExp.Designations = new ObservableCollection<Designation>();
+            CurrentEmployee = new Model.Employee();
             CurrentExp.Designations = new ObservableCollection<Designation>();
+            CurrentEmployee.EmployeeDetails = new EmployeeDetails();
+            CurrentEmployee.PersonalDetails = new EmployeePersonalDetails();
             CurrentEmployee.EmployeeQualifications = new ObservableCollection<EmployeeQualifications>();
             CurrentEmployee.EmployeeExperience = new ObservableCollection<EmployeeExperience>();
             CurrentEmployee.EmployeeDetails.Designation = new Designation();
             CurrentEmployee.EmployeeDetails.Department = new Department();
+            
             GetDeptDesg();
            
             GetEmployee();
